@@ -1,8 +1,6 @@
 package org.examplemovieApp.model;
 
 import lombok.*;
-import org.hibernate.annotations.OptimisticLock;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +10,17 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "movies")
+@EqualsAndHashCode(exclude = "movies", callSuper = true)
 @ToString(exclude = "movies")
-public class Actor {
-    @Id
-    @GeneratedValue
-    private UUID id;
+public class Actor extends BaseEntity {
+
     private String name;
+
     @Column(name = "last_name")
     private String lastName;
+
     @Column(name = "year_of_birth")
     private int yearOfBirth;
-
 
     @ManyToMany
     @JoinTable(name = "actors_to_movies",

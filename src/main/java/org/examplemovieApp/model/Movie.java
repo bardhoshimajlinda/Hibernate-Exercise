@@ -11,13 +11,12 @@ import java.util.UUID;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = "actors")
+@EqualsAndHashCode(exclude = "actors", callSuper = true)
 @ToString(exclude = "actors")
-public class Movie {
-    @Id
-    @GeneratedValue
-    private UUID id;
+public class Movie extends BaseEntity{
+
     private String title;
+
     @Column(name = "year_of_release")
     private int yearOfRelease;
 

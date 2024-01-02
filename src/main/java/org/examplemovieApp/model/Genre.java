@@ -1,22 +1,17 @@
 package org.examplemovieApp.model;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.List;
-import java.util.UUID;
+
 
 @Entity(name = "genres")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(exclude = "movies")
+@EqualsAndHashCode(exclude = "movies", callSuper = true)
 @ToString(exclude = "movies")
-public class Genre {
-
-    @Id
-    @GeneratedValue
-    private UUID id;
+public class Genre extends BaseEntity{
 
     private String name;
 
