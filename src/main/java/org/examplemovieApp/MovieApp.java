@@ -3,6 +3,7 @@ package org.examplemovieApp;
 import org.examplemovieApp.model.Actor;
 import org.examplemovieApp.model.Genre;
 import org.examplemovieApp.model.Movie;
+import org.examplemovieApp.repository.ActorRepository;
 import org.examplemovieApp.repository.GenreRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -36,6 +37,13 @@ public class MovieApp {
         genreRepository.deleteGenre(genreId);
         System.out.println("Genre deleted");
 
-        sessionFactory.close();
+
+        final ActorRepository actorRepository = new ActorRepository(sessionFactory.createEntityManager());
+        actorRepository.save(new Actor("John", "Smith", 1970, null));
+
+        List<Actor> actorsBornAfter1960 = actorRepository.findActorsBornAfterYear(1960);
+        System.out.println(actorsBornAfter1960);
+
+        //sessionFactory.close();
     }
 }
