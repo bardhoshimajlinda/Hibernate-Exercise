@@ -5,6 +5,7 @@ import org.examplemovieApp.model.Genre;
 import org.examplemovieApp.model.Movie;
 import org.examplemovieApp.repository.ActorRepository;
 import org.examplemovieApp.repository.GenreRepository;
+import org.examplemovieApp.repository.MovieRepository;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import java.util.List;
@@ -39,11 +40,17 @@ public class MovieApp {
 
 
         final ActorRepository actorRepository = new ActorRepository(sessionFactory.createEntityManager());
-        actorRepository.save(new Actor("John", "Smith", 1970, null));
+        Actor savedActor = actorRepository.addActor(new Actor("John", "Smith", 1970, null));
 
         List<Actor> actorsBornAfter1960 = actorRepository.findActorsBornAfterYear(1960);
         System.out.println(actorsBornAfter1960);
 
-        //sessionFactory.close();
+
+        final MovieRepository movieRepository = new MovieRepository(sessionFactory.createEntityManager());
+        movieRepository.addMovie(new Movie("Predator", 1980, List.of(savedActor), null));
+        System.out.println(movieRepository.getAllMovies());
+        System.out.println(movieRepository.recordsWithActors());
+
+        sessionFactory.close();
     }
 }

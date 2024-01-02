@@ -17,7 +17,7 @@ public class ActorRepository {
         this.entityManager = entityManager;
     }
 
-    public Actor save(Actor actor) {
+    public Actor addActor(Actor actor) {
         EntityTransaction transaction = null;
         try {
             transaction = entityManager.getTransaction();
